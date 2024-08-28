@@ -58,6 +58,90 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Add Details on .env
+```
+PRIVATE_KEY="0x"
+RPC_ENDPOINT="https://1rpc.io/sepolia"
+TOKEN_ADDRESS="0x77ec5e6688e9e212feedfe08ea67ecd911bae5d9"
+```
+## Routes
+
+# Token API
+
+This API provides endpoints to interact with an ERC20 token on the Sepolia testnet.
+
+## Endpoints
+
+### 1. Get Contract Address
+- **URL**: `/contract-address`
+- **Method**: GET
+- **Example**: 
+  ```
+  curl http://localhost:3000/contract-address
+  ```
+
+### 2. Get Token Name
+- **URL**: `/token-name`
+- **Method**: GET
+- **Example**:
+  ```
+  curl http://localhost:3000/token-name
+  ```
+
+### 3. Get Total Supply
+- **URL**: `/total-supply`
+- **Method**: GET
+- **Example**:
+  ```
+  curl http://localhost:3000/total-supply
+  ```
+
+### 4. Get Token Balance
+- **URL**: `/token-balance/:address`
+- **Method**: GET
+- **Example**:
+  ```
+  curl "http://localhost:3000/token-balance/0x777410F6AE513F55c714c6843D66929dc7933280"
+  ```
+
+### 5. Get Transaction Receipt
+- **URL**: `/transaction-receipt`
+- **Method**: GET
+- **Query Params**: `hash`
+- **Example**:
+  ```
+  curl "http://localhost:3000/transaction-receipt?hash=0xff32b7d374c9e879cd8f0220db70158ea64d4bced7b50c1c6a991f07a4ba14f9"
+  ```
+
+### 6. Get Server Wallet Address
+- **URL**: `/server-wallet-address`
+- **Method**: GET
+- **Example**:
+  ```
+  curl http://localhost:3000/server-wallet-address
+  ```
+
+### 7. Check Minter Role
+- **URL**: `/check-minter-role`
+- **Method**: GET
+- **Query Params**: `address`
+- **Example**:
+  ```
+  curl "http://localhost:3000/check-minter-role?address=0x777410F6AE513F55c714c6843D66929dc7933280"
+  ```
+
+### 8. Mint Tokens
+- **URL**: `/mint-tokens`
+- **Method**: POST
+- **Body**: JSON with `address` field
+- **Example**:
+  ```
+  curl -X POST -H "Content-Type: application/json" -d '{"address":"0x777410F6AE513F55c714c6843D66929dc7933280"}' http://localhost:3000/mint-tokens
+  ```
+
+## Note
+Ensure you replace `localhost:3000` with your actual server address if different. All responses are in JSON format.
+
 ## Resources
 
 Check out a few resources that may come in handy when working with NestJS:

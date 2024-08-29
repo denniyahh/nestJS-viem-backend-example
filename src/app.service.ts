@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { privateKeyToAccount } from 'viem/accounts';
 import { createWalletClient } from 'viem';
 import { parseEther } from 'viem';
+import { MintTokenDto } from './dtos/mintToken.dto';
 
 @Injectable()
 export class AppService {
@@ -109,25 +110,27 @@ export class AppService {
     return hasMinterRole as boolean;
   }
 
-  async mintTokens(address: string) {
+  async mintTokens(body: MintTokenDto) {
+    const address = body.address;
+    const amount = body.amount;
     try {
       const mintTx = await this.walletClient.writeContract({
         address: this.getContractAddress(),
         abi: tokenJSON.abi,
         functionName: 'mint',
-        args: [address, parseEther('100')],
+        args: [address, parseEther(amount.toString())],
       });
 
       if (await this.waitForTransactionSuccess(mintTx)) {
         console.log(`Minted 100 tokens to ${address}`);
         return {
-          success: true,
+          result: true,
           message: `Minted 100 tokens to ${address}`,
           transactionHash: mintTx,
         };
       } else {
         return {
-          success: false,
+          result: false,
           message: `Failed to mint tokens to ${address}`,
           transactionHash: mintTx,
         };
@@ -135,7 +138,7 @@ export class AppService {
     } catch (error) {
       console.error('Error in mintTokens:', error);
       return {
-        success: false,
+        result: false,
         message: `Error minting tokens: ${error.message}`,
       };
     }

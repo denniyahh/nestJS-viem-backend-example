@@ -4,7 +4,7 @@ import { MintTokenDto } from './dtos/mintToken.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -81,14 +81,15 @@ export class AppController {
   {"success":true,"message":"Minted 100 tokens to 0x777410F6AE513F55c714c6843D66929dc7933280","transactionHash":"0xff32b7d374c9e879cd8f0220db70158ea64d4bced7b50c1c6a991f07a4ba14f9"}%
   */
   @Post('mint-tokens')
-  async mintTokens(@Body() body: { address: string }) {
+  async mintTokens(@Body() body: MintTokenDto) {
     try {
-      const result = await this.appService.mintTokens(body.address);
+      console.log('Minting tokens:', body);
+      const result = await this.appService.mintTokens(body);
       return result;
     } catch (error) {
       console.error('Error in mintTokens:', error);
       return {
-        success: false,
+        result: false,
         message: 'Internal server error',
         error: error.message,
       };

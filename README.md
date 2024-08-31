@@ -60,9 +60,9 @@ $ npm run test:cov
 
 ## Add Details on .env
 ```
-PRIVATE_KEY="0x"
-RPC_ENDPOINT="https://1rpc.io/sepolia"
-TOKEN_ADDRESS="0x77ec5e6688e9e212feedfe08ea67ecd911bae5d9"
+PRIVATE_KEY="0x" <-- Replace this with your private key
+RPC_ENDPOINT="https://1rpc.io/sepolia" <-- Replace this with your RPC endpoint
+TOKEN_ADDRESS="0x77ec5e6688e9e212feedfe08ea67ecd911bae5d9" <-- Replace this with the address of your deployed contract
 ```
 ## Routes
 

@@ -122,10 +122,10 @@ export class AppService {
       });
 
       if (await this.waitForTransactionSuccess(mintTx)) {
-        console.log(`Minted 100 tokens to ${address}`);
+        console.log(`Minted ${amount} tokens to ${address}`);
         return {
           result: true,
-          message: `Minted 100 tokens to ${address}`,
+          message: `Minted  ${amount} tokens to ${address}`,
           transactionHash: mintTx,
         };
       } else {
